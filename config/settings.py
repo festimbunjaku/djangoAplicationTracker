@@ -55,12 +55,14 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'rest_framework_simplejwt.token_blacklist',  
+
 ]
 
 SITE_ID = 1
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 
@@ -74,7 +76,7 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
 }
 
 REST_AUTH = {
@@ -82,8 +84,8 @@ REST_AUTH = {
         'username': {'required': True},
         'email': {'required': True},
     },
-    'JWT_AUTH_COOKIE': 'my-app-auth',
-    'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+    # 'JWT_AUTH_COOKIE': 'my-app-auth',
+    # 'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
     'LOGOUT_ON_PASSWORD_CHANGE': False,
     'OLD_PASSWORD_FIELD_ENABLED': True,
     'USE_JWT': True,
@@ -93,12 +95,11 @@ REST_AUTH_SERIALIZERS = {
 }
 
 REST_USE_JWT = True
-
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),      # short-lived access token
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),        # refresh token valid for 1 day
-    'ROTATE_REFRESH_TOKENS': True,                       # issue a new refresh token on refresh
-    'BLACKLIST_AFTER_ROTATION': True,                    # blacklist used refresh tokens
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
