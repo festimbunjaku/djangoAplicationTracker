@@ -13,4 +13,4 @@ wheels/
 .env
 
 # qa duhet me ndrru production
-.production.txt
+production.txt
