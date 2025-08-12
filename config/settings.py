@@ -58,6 +58,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',  
     'corsheaders',
 
+    # APPS
+    'application',
+
 ]
 
 SITE_ID = 1
@@ -114,6 +117,7 @@ SIMPLE_JWT = {
     'AUTH_COOKIE_HTTP_ONLY': True,
     'AUTH_COOKIE_PATH': '/',
     'AUTH_COOKIE_SAMESITE': 'Lax',
+
 }
 
 MIDDLEWARE = [
